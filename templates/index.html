@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Pinterest Automation</title>
+</head>
+<body>
+
+<h1>Wähle eine Kollektion</h1>
+
+<!-- 🔔 Show Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<!-- ✅ Collection Selection Form -->
+<form method="POST" action="{{ url_for('process_collection') }}">
+    <label for="collection_id">Kollektion auswählen:</label>
+    <select name="collection_id" required>
+        {% for collection_id, collection_name in collections %}
+            <option value="{{ collection_id }}">{{ collection_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Start Processing</button>
+</form>
+
+<!-- 📂 Logo Upload -->
+<h2>Logo Hochladen</h2>
+<form action="{{ url_for('upload_logo') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Logo hochladen</button>
+</form>
+
+</body>
+</html>
