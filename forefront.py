@@ -9,28 +9,23 @@ import openai
 import re
 import time
 import sys
-import base64
 import zipfile
 import random
 import concurrent.futures
 from collections import defaultdict
 from google.oauth2.service_account import Credentials
-from flask import Flask, render_template, request, json, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from script import run_pinterest_automation  # Import main function from script.py
 
 # 🔑 Shopify API Credentials (Ensure they are also set in script.py)
 SHOPIFY_API_KEY = "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"
 SHOPIFY_STORE_URL = "92c6ce-58.myshopify.com"
-CREDENTIALS_FILE = "google_sheets_credentials.json"
+CREDENTIALS_FILE = "credentials.json"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-encoded = os.getenv("GOOGLE_CREDENTIALS_B64")
-creds_json = base64.b64decode(encoded).decode("utf-8")
-creds_dict = json.loads(creds_json)
-creds = Credentials.from_service_account_info(creds_dict)
 
 # ✅ Authenticate Google Sheets
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scope)
 client = gspread.authorize(creds)
 
 # ✅ Connect to Google Sheets
