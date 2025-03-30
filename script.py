@@ -11,7 +11,7 @@ import random
 from flask import Flask, request, redirect, url_for, flash
 
 # 🔑 API Keys & Config
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SHOPIFY_API_KEY = "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"
 SHOPIFY_STORE_URL = "92c6ce-58.myshopify.com" 
 SHEET_NAME = "Pinterest_Automation"

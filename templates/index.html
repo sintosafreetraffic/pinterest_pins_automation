@@ -9,7 +9,7 @@
 
 <h1>Wähle eine Kollektion</h1>
 
-<!-- 🔔 Show Flash Messages -->
+<!-- 🔔 Flash Messages -->
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
@@ -18,13 +18,17 @@
     {% endif %}
 {% endwith %}
 
-<!-- ✅ Collection Selection Form -->
+<!-- ✅ Collection Selection -->
 <form method="POST" action="{{ url_for('process_collection') }}">
     <label for="collection_id">Kollektion auswählen:</label>
-    <select name="collection_id" required>
-        {% for collection_id, collection_name in collections %}
-            <option value="{{ collection_id }}">{{ collection_name }}</option>
-        {% endfor %}
+    <select name="collection_id" id="collection_id" required>
+        {% if collections %}
+            {% for collection_id, collection_name in collections %}
+                <option value="{{ collection_id }}">{{ collection_name }}</option>
+            {% endfor %}
+        {% else %}
+            <option disabled>⚠️ Keine Kollektionen gefunden</option>
+        {% endif %}
     </select>
     <button type="submit">Start Processing</button>
 </form>

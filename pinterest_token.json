@@ -1,0 +1,5 @@
+{
+  "name": "Sandbox token",
+  "access_token": "pina_AMARKGQXABBT4AYAGBAHSDSYLAJ6DFIBACGSP6KHXDSOZE72H4TTFXUKJLL4WZIUD3T2UAKJZYZV2PS537ZWQW7TZ7LKGFAA",
+  "scopes": "ads:read boards:read boards:read_secret boards:write boards:write_secret catalogs:read catalogs:write pins:read pins:read_secret pins:write pins:write_secret user_accounts:read"
+}

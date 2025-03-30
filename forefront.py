@@ -1,5 +1,6 @@
 import os
 import shutil
+import string
 import threading
 import requests
 import queue
@@ -8,10 +9,12 @@ import openai
 import re
 import time
 import sys
+import zipfile
+import random
 import concurrent.futures
 from collections import defaultdict
 from google.oauth2.service_account import Credentials
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from script import run_pinterest_automation  # Import main function from script.py
 
 # 🔑 Shopify API Credentials (Ensure they are also set in script.py)
@@ -26,7 +29,7 @@ creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scope)
 client = gspread.authorize(creds)
 
 # ✅ Connect to Google Sheets
-SHEET_ID = "1SutOYJ0UA-DDy1d4Xf86jf4wh8-ImNG5Tq0lcvMlqmE"
+SHEET_ID = "1NuxtCo3z1DKHk7GLW-uIqHs6kFpz3G3gF_tKInciBEE"
 try:
     sheet = client.open_by_key(SHEET_ID).sheet1
     print("✅ Connected to Google Sheets successfully!")
